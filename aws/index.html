@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AWS & DevOps Landing Page</title>
+    <style>
+        /* Import a modern sans-serif font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #0b111a; /* Deep dark blue/black */
+            background-image: radial-gradient(circle at 10% 20%, rgba(30, 58, 138, 0.2) 0%, transparent 40%),
+                              radial-gradient(circle at 90% 80%, rgba(8, 145, 178, 0.15) 0%, transparent 40%);
+            color: #ffffff;
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
+
+        /* Main Container to center content */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .logo-icon {
+            width: 32px;
+            height: 32px;
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #94a3b8;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background-color: rgba(30, 41, 59, 0.6);
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 8px 20px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(5px);
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background-color: #1e293b;
+            border-color: #475569;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 60px;
+            gap: 60px;
+        }
+
+        /* Left Content Area */
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #94a3b8;
+            border: 1px solid #1e293b;
+            background-color: rgba(30, 41, 59, 0.4);
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.15;
+            font-weight: 700;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+        }
+
+        .text-aws {
+            color: #f59e0b; /* Amber/Orange */
+        }
+
+        .text-devops {
+            color: #06b6d4; /* Cyan */
+        }
+
+        .hero-content p {
+            color: #94a3b8;
+            font-size: 1.05rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 480px;
+        }
+
+        /* Call to Action Buttons */
+        .cta-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background-color: #fbbf24; /* Bright yellow/orange */
+            color: #0f172a;
+        }
+
+        .btn-primary:hover {
+            background-color: #f59e0b;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background-color: #1e293b;
+            color: #ffffff;
+            border: 1px solid #334155;
+        }
+
+        .btn-secondary:hover {
+            background-color: #334155;
+            transform: translateY(-2px);
+        }
+
+        /* Right Graphic Area */
+        .hero-graphic {
+            flex: 1;
+            position: relative;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .graphic-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(6, 182, 212, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Abstract Infinity Loop (CSS representation) */
+        .infinity-loop {
+            position: relative;
+            display: flex;
+            z-index: 2;
+        }
+
+        .loop-left, .loop-right {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 12px solid;
+            position: relative;
+        }
+
+        .loop-left {
+            border-color: #f59e0b #f59e0b transparent transparent;
+            transform: rotate(45deg);
+            margin-right: -40px; /* Overlap */
+            left: 20px;
+        }
+
+        .loop-right {
+            border-color: transparent transparent #06b6d4 #06b6d4;
+            transform: rotate(45deg);
+            right: 20px;
+        }
+
+        /* Floating UI Cards (Background elements) */
+        .glass-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .card-1 {
+            width: 80px;
+            height: 80px;
+            top: 40px;
+            right: 20px;
+        }
+
+        .card-2 {
+            width: 60px;
+            height: 60px;
+            top: 100px;
+            right: 0px;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        /* --- NEW AWS CONTENT SECTIONS --- */
+
+        /* Section Styling */
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+
+        .section-header p {
+            color: #94a3b8;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .service-card {
+            background-color: rgba(30, 41, 59, 0.4);
+            border: 1px solid #1e293b;
+            border-radius: 12px;
+            padding: 30px;
+            transition: transform 0.3s ease, border-color 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            border-color: #334155;
+            background-color: rgba(30, 41, 59, 0.7);
+        }
+
+        .service-icon {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            display: inline-block;
+            background: #0f172a;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #334155;
+        }
+
+        .service-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 12px;
+            color: #f8fafc;
+        }
+
+        .service-card p {
+            color: #94a3b8;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Tech Stack Section */
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tech-tag {
+            background-color: #1e293b;
+            border: 1px solid #334155;
+            color: #e2e8f0;
+            padding: 10px 24px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+        }
+
+        .tech-tag:hover {
+            background-color: #334155;
+            border-color: #f59e0b; /* AWS Orange highlight */
+            color: #ffffff;
+        }
+
+        /* Footer */
+        footer {
+            border-top: 1px solid #1e293b;
+            padding: 40px 0;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                margin-top: 40px;
+            }
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-content p {
+                margin: 0 auto 30px auto;
+            }
+            .cta-group {
+                justify-content: center;
+            }
+            .hero-graphic {
+                margin-top: 50px;
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn {
+                width: 100%;
+            }
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-icon">▶</div>
+                AWS & DevOps
+            </div>
+            <div class="nav-links">
+                <a href="#contact" class="nav-btn">Contact</a>
+                <a href="#demo" class="nav-btn">Live Demo</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <main class="hero">
+            <!-- Left Side: Text Content -->
+            <div class="hero-content">
+                <div class="badge">Cloud Native Delivery • Secure • Reliable</div>
+                
+                <h1>
+                    Build, ship, and scale on <br>
+                    <span class="text-aws">AWS</span> with battle-tested <br>
+                    <span class="text-devops">DevOps.</span>
+                </h1>
+                
+                <p>
+                    From infrastructure as code to CI/CD and observability, this starter page 
+                    showcases a clean, modern layout you can drop into any AWS project.
+                </p>
+                
+                <div class="cta-group">
+                    <a href="#services" class="btn btn-primary">Explore Services</a>
+                    <a href="#tech-stack" class="btn btn-secondary">View Tech Stack</a>
+                </div>
+            </div>
+
+            <!-- Right Side: Abstract Graphic -->
+            <div class="hero-graphic">
+                <div class="graphic-glow"></div>
+                
+                <!-- Infinity Loop Representation -->
+                <div class="infinity-loop">
+                    <div class="loop-left"></div>
+                    <div class="loop-right"></div>
+                </div>
+
+                <!-- Floating Glassmorphism Cards -->
+                <div class="glass-card card-1"></div>
+                <div class="glass-card card-2"></div>
+            </div>
+        </main>
+
+        <!-- AWS Services Section -->
+        <section id="services">
+            <div class="section-header">
+                <h2>What we do</h2>
+                <p>We architect, deploy, and manage scalable solutions entirely within the AWS ecosystem.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Infrastructure as Code</h3>
+                    <p>Automate your AWS provisioning with Terraform and AWS CloudFormation for consistent, reproducible environments.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>CI/CD Pipelines</h3>
+                    <p>Streamline deployments with AWS CodePipeline, CodeBuild, and GitHub Actions for rapid, reliable software delivery.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>Container Orchestration</h3>
+                    <p>Deploy and scale microservices effortlessly using Amazon EKS, ECS, and AWS Fargate without managing servers.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Observability</h3>
+                    <p>Gain deep insights into your AWS infrastructure with CloudWatch, Prometheus, and Grafana monitoring solutions.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Security & Compliance</h3>
+                    <p>Implement least-privilege IAM policies, VPC security groups, and AWS WAF to protect your cloud assets.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Serverless Architecture</h3>
+                    <p>Build highly scalable, event-driven applications using AWS Lambda, API Gateway, and DynamoDB.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section id="tech-stack" style="background-color: rgba(15, 23, 42, 0.5); border-top: 1px solid #1e293b; border-bottom: 1px solid #1e293b;">
+            <div class="section-header">
+                <h2>Our AWS Tech Stack</h2>
+                <p>The core services we use to build resilient cloud-native applications.</p>
+            </div>
+            
+            <div class="tech-stack">
+                <span class="tech-tag">Amazon EC2</span>
+                <span class="tech-tag">Amazon S3</span>
+                <span class="tech-tag">AWS Lambda</span>
+                <span class="tech-tag">Amazon EKS</span>
+                <span class="tech-tag">Amazon RDS</span>
+                <span class="tech-tag">DynamoDB</span>
+                <span class="tech-tag">CloudFront</span>
+                <span class="tech-tag">Route 53</span>
+                <span class="tech-tag">AWS IAM</span>
+                <span class="tech-tag">CloudFormation</span>
+                <span class="tech-tag">Amazon VPC</span>
+                <span class="tech-tag">AWS CodePipeline</span>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 AWS & DevOps. All rights reserved. Built for the cloud.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

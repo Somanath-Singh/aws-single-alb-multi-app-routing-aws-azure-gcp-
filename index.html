@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multicloud Devops</title>
+    <style>
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #f4f5f7;
+            color: #333;
+        }
+
+        /* Header Section */
+        .header {
+            background-color: #0069d9;
+            color: white;
+            text-align: center;
+            padding: 60px 20px 80px 20px;
+        }
+
+        .header h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            font-size: 1rem;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+
+        /* Main Content Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            margin-top: -40px; /* Pulls the cards up slightly over the header */
+        }
+
+        /* Grid Layout for Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        /* Card Styles */
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            padding: 40px 25px;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            border-top: 5px solid transparent;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Specific Card Top Borders */
+        .card.aws {
+            border-top-color: #ff9900;
+        }
+
+        .card.azure {
+            border-top-color: #0078d4;
+        }
+
+        .card.gcp {
+            border-top-color: #ea4335;
+            grid-column: span 2; /* Makes the GCP card span across both columns */
+        }
+
+        /* Card Typography */
+        .card h2 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: #222;
+            margin-bottom: 12px;
+        }
+
+        .card p {
+            font-size: 0.9rem;
+            color: #666;
+            margin-bottom: 25px;
+            line-height: 1.4;
+        }
+
+        /* Button Styles */
+        .btn {
+            background-color: #0069d9;
+            color: white;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 5px;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: background-color 0.2s ease;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .cards-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .card.gcp {
+                grid-column: span 1;
+            }
+
+            .header h1 {
+                font-size: 1.5rem;
+            }
+            
+            .header {
+                padding: 40px 15px 60px 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="header">
+        <h1>Multicloud Devops by veera nareshit</h1>
+        <p>Click a platform below to verify ALB routing</p>
+    </header>
+
+    <main class="container">
+        <div class="cards-grid">
+            
+            <!-- AWS Card -->
+            <div class="card aws">
+                <h2>Amazon Web Services (AWS)</h2>
+                <p>Test routing to the AWS backend using ALB.</p>
+                <a href="#" class="btn">Go to AWS</a>
+            </div>
+
+            <!-- Azure Card -->
+            <div class="card azure">
+                <h2>Microsoft Azure</h2>
+                <p>Test routing to the Azure backend using ALB.</p>
+                <a href="#" class="btn">Go to Azure</a>
+            </div>
+
+            <!-- GCP Card -->
+            <div class="card gcp">
+                <h2>Google Cloud Platform (GCP)</h2>
+                <p>Test routing to the GCP backend using ALB.</p>
+                <a href="#" class="btn">Go to GCP</a>
+            </div>
+
+        </div>
+    </main>
+
+</body>
+</html>

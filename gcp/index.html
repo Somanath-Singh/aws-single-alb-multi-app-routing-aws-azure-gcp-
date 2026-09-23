@@ -1,0 +1,572 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Cloud & DevOps</title>
+    <style>
+        /* Import Google's classic font */
+        @import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap');
+
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Roboto', sans-serif;
+            background-color: #ffffff;
+            color: #202124; /* Google Dark Gray */
+            min-height: 100vh;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Google Color Accent Bar at top */
+        .color-bar {
+            display: flex;
+            height: 4px;
+            width: 100%;
+        }
+        .color-bar .blue { flex: 1; background-color: #4285F4; }
+        .color-bar .red { flex: 1; background-color: #EA4335; }
+        .color-bar .yellow { flex: 1; background-color: #FBBC04; }
+        .color-bar .green { flex: 1; background-color: #34A853; }
+
+        /* Main Container */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+            border-bottom: 1px solid #f1f3f4;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.2rem;
+            font-weight: 500;
+            color: #202124;
+        }
+
+        .logo-icon {
+            display: flex;
+            gap: 4px;
+        }
+
+        .logo-icon span {
+            width: 10px;
+            height: 10px;
+            border-radius: 2px;
+        }
+        .logo-icon span:nth-child(1) { background-color: #4285F4; }
+        .logo-icon span:nth-child(2) { background-color: #EA4335; }
+        .logo-icon span:nth-child(3) { background-color: #FBBC04; }
+        .logo-icon span:nth-child(4) { background-color: #34A853; }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: 1px solid #dadce0;
+            color: #1a73e8; /* Google Blue */
+            padding: 8px 24px;
+            border-radius: 24px; /* Google Pill shape */
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background-color: #f8f9fa;
+            border-color: #dadce0;
+            box-shadow: 0 1px 2px rgba(60,64,67,0.3);
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 0;
+            gap: 60px;
+        }
+
+        /* Left Content Area */
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #1a73e8;
+            background-color: #e8f0fe;
+            padding: 6px 16px;
+            border-radius: 16px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 700;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+            color: #202124;
+        }
+
+        .text-gcp-blue { color: #4285F4; }
+        .text-gcp-red { color: #EA4335; }
+        .text-gcp-yellow { color: #FBBC04; }
+        .text-gcp-green { color: #34A853; }
+
+        .hero-content p {
+            color: #5f6368;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        /* Call to Action Buttons */
+        .cta-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 32px;
+            border-radius: 24px; /* Google Pill shape */
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #1a73e8;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1557b0;
+            box-shadow: 0 1px 3px rgba(60,64,67,0.3), 0 4px 8px rgba(60,64,67,0.15);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #1a73e8;
+            border: 1px solid #dadce0;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f8f9fa;
+            border-color: #dadce0;
+            box-shadow: 0 1px 2px rgba(60,64,67,0.3);
+        }
+
+        /* Right Graphic Area - Abstract Google Colors */
+        .hero-graphic {
+            flex: 1;
+            position: relative;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .graphic-glow {
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(66, 133, 244, 0.1) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Abstract Geometric Cloud Graphic */
+        .gcp-graphic {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            z-index: 2;
+        }
+
+        .gcp-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.9;
+            transition: transform 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 1.5rem;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        }
+
+        .gcp-shape:hover {
+            transform: scale(1.15);
+            z-index: 10;
+        }
+
+        .shape-blue {
+            width: 140px;
+            height: 140px;
+            background-color: #4285F4;
+            top: 20px;
+            left: 20px;
+        }
+
+        .shape-red {
+            width: 110px;
+            height: 110px;
+            background-color: #EA4335;
+            top: 50px;
+            right: 20px;
+        }
+
+        .shape-yellow {
+            width: 100px;
+            height: 100px;
+            background-color: #FBBC04;
+            bottom: 30px;
+            left: 40px;
+        }
+
+        .shape-green {
+            width: 130px;
+            height: 130px;
+            background-color: #34A853;
+            bottom: 0;
+            right: 30px;
+        }
+
+        /* --- GCP CONTENT SECTIONS --- */
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #202124;
+        }
+
+        .section-header p {
+            color: #5f6368;
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            border: 1px solid #dadce0;
+            border-radius: 12px;
+            padding: 35px 30px;
+            transition: box-shadow 0.3s ease, transform 0.3s ease;
+        }
+
+        .service-card:hover {
+            box-shadow: 0 1px 3px rgba(60,64,67,0.3), 0 4px 8px rgba(60,64,67,0.15);
+            transform: translateY(-2px);
+        }
+
+        .service-icon {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 56px;
+            height: 56px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: #202124;
+            font-weight: 500;
+        }
+
+        .service-card p {
+            color: #5f6368;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Tech Stack Section */
+        .tech-stack-section {
+            background-color: #f8f9fa;
+            border-top: 1px solid #dadce0;
+            border-bottom: 1px solid #dadce0;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .tech-tag {
+            background-color: white;
+            border: 1px solid #dadce0;
+            color: #3c4043;
+            padding: 10px 24px;
+            border-radius: 24px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            box-shadow: 0 1px 2px rgba(60,64,67,0.1);
+        }
+
+        .tech-tag:hover {
+            background-color: #e8f0fe;
+            border-color: #1a73e8;
+            color: #1a73e8;
+            box-shadow: 0 1px 3px rgba(60,64,67,0.3);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #5f6368;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 0;
+            }
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-content p {
+                margin: 0 auto 30px auto;
+            }
+            .cta-group {
+                justify-content: center;
+            }
+            .hero-graphic {
+                margin-top: 40px;
+                width: 100%;
+                transform: scale(0.85);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Google Color Accent Bar -->
+    <div class="color-bar">
+        <div class="blue"></div>
+        <div class="red"></div>
+        <div class="yellow"></div>
+        <div class="green"></div>
+    </div>
+
+    <div class="wrapper">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-icon">
+                    <span></span><span></span><span></span><span></span>
+                </div>
+                Google Cloud & DevOps
+            </div>
+            <div class="nav-links">
+                <a href="#contact" class="nav-btn">Contact</a>
+                <a href="#demo" class="nav-btn">Live Demo</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <main class="hero">
+            <!-- Left Side: Text Content -->
+            <div class="hero-content">
+                <div class="badge">Google Cloud Native • Secure • Scalable</div>
+                
+                <h1>
+                    Build, ship, and scale on <br>
+                    <span class="text-gcp-blue">G</span><span class="text-gcp-red">C</span><span class="text-gcp-yellow">P</span> with modern <br>
+                    <span class="text-gcp-green">DevOps.</span>
+                </h1>
+                
+                <p>
+                    From infrastructure as code to CI/CD and observability, this starter page 
+                    showcases a clean, modern layout you can drop into any Google Cloud project.
+                </p>
+                
+                <div class="cta-group">
+                    <a href="#services" class="btn btn-primary">Explore Services</a>
+                    <a href="#tech-stack" class="btn btn-secondary">View Tech Stack</a>
+                </div>
+            </div>
+
+            <!-- Right Side: Abstract Graphic -->
+            <div class="hero-graphic">
+                <div class="graphic-glow"></div>
+                
+                <!-- Abstract GCP Geometric Colors -->
+                <div class="gcp-graphic">
+                    <div class="gcp-shape shape-blue">☁</div>
+                    <div class="gcp-shape shape-red">⚙</div>
+                    <div class="gcp-shape shape-yellow">📦</div>
+                    <div class="gcp-shape shape-green">📊</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- GCP Services Section -->
+        <section id="services">
+            <div class="section-header">
+                <h2>What we do</h2>
+                <p>We architect, deploy, and manage scalable solutions entirely within the Google Cloud ecosystem.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Infrastructure as Code</h3>
+                    <p>Automate your GCP provisioning with Terraform and Deployment Manager for consistent, reproducible cloud environments.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>CI/CD Pipelines</h3>
+                    <p>Streamline deployments with Cloud Build, GitHub Actions, and Artifact Registry for rapid, reliable software delivery.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>Container Orchestration</h3>
+                    <p>Deploy and scale microservices effortlessly using Google Kubernetes Engine (GKE) and Cloud Run.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Observability</h3>
+                    <p>Gain deep insights into your GCP infrastructure with Cloud Monitoring, Cloud Logging, and Error Reporting.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Security & Compliance</h3>
+                    <p>Implement Zero Trust architecture, Cloud IAM, and Secret Manager for robust cloud security.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Serverless & Data</h3>
+                    <p>Build highly scalable, event-driven applications using Cloud Functions, Pub/Sub, and BigQuery.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section id="tech-stack" class="tech-stack-section">
+            <div class="section-header">
+                <h2>Our GCP Tech Stack</h2>
+                <p>The core Google Cloud services we use to build resilient cloud-native applications.</p>
+            </div>
+            
+            <div class="tech-stack">
+                <span class="tech-tag">Google Kubernetes Engine (GKE)</span>
+                <span class="tech-tag">Cloud Run</span>
+                <span class="tech-tag">Cloud Functions</span>
+                <span class="tech-tag">Cloud Build</span>
+                <span class="tech-tag">BigQuery</span>
+                <span class="tech-tag">Cloud Spanner</span>
+                <span class="tech-tag">Firestore</span>
+                <span class="tech-tag">Pub/Sub</span>
+                <span class="tech-tag">Cloud IAM</span>
+                <span class="tech-tag">Terraform</span>
+                <span class="tech-tag">Cloud CDN</span>
+                <span class="tech-tag">Artifact Registry</span>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 Google Cloud & DevOps. All rights reserved. Built for the cloud.</p>
+        </footer>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Microsoft Azure & DevOps</title>
+    <style>
+        /* Import a clean, modern font */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        /* Reset and Base Styles */
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f9fa; /* Very light gray/white */
+            color: #201f1e; /* Microsoft Dark Gray */
+            min-height: 100vh;
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Main Container */
+        .wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        /* Navigation Bar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 25px 0;
+            border-bottom: 1px solid #edebe9;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #0078d4; /* Azure Blue */
+        }
+
+        .logo-icon {
+            width: 34px;
+            height: 34px;
+            background-color: #0078d4;
+            border-radius: 8px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            color: white;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .nav-btn {
+            background-color: transparent;
+            border: 1px solid #c8c6c4;
+            color: #323130;
+            padding: 8px 20px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+        }
+
+        .nav-btn:hover {
+            background-color: #edebe9;
+            border-color: #a19f9d;
+        }
+
+        /* Hero Section */
+        .hero {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 80px 0;
+            gap: 60px;
+        }
+
+        /* Left Content Area */
+        .hero-content {
+            flex: 1;
+            max-width: 600px;
+        }
+
+        .badge {
+            display: inline-block;
+            font-size: 0.75rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #0078d4;
+            background-color: #e6f2ff;
+            padding: 6px 16px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            line-height: 1.1;
+            font-weight: 800;
+            margin-bottom: 25px;
+            letter-spacing: -1px;
+            color: #201f1e;
+        }
+
+        .text-azure {
+            color: #0078d4; /* Azure Blue */
+        }
+
+        .text-devops {
+            color: #008272; /* Azure Teal/Green accent */
+        }
+
+        .hero-content p {
+            color: #605e5c;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 500px;
+        }
+
+        /* Call to Action Buttons */
+        .cta-group {
+            display: flex;
+            gap: 15px;
+        }
+
+        .btn {
+            padding: 14px 28px;
+            border-radius: 4px;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: none;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background-color: #0078d4;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #005a9e;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 120, 212, 0.3);
+        }
+
+        .btn-secondary {
+            background-color: white;
+            color: #323130;
+            border: 1px solid #c8c6c4;
+        }
+
+        .btn-secondary:hover {
+            background-color: #f3f2f1;
+            transform: translateY(-2px);
+        }
+
+        /* Right Graphic Area - Azure Cloud Network */
+        .hero-graphic {
+            flex: 1;
+            position: relative;
+            height: 400px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Soft Blue Glow behind the graphic */
+        .graphic-glow {
+            position: absolute;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(0, 120, 212, 0.15) 0%, transparent 70%);
+            border-radius: 50%;
+            z-index: 1;
+        }
+
+        /* Abstract Azure Network Nodes */
+        .network-grid {
+            position: relative;
+            width: 300px;
+            height: 300px;
+            z-index: 2;
+        }
+
+        .node {
+            position: absolute;
+            background: white;
+            border: 2px solid #0078d4;
+            border-radius: 12px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.2rem;
+            color: #0078d4;
+            transition: transform 0.3s ease;
+        }
+
+        .node:hover {
+            transform: scale(1.1);
+            z-index: 10;
+        }
+
+        /* Specific Nodes */
+        .node-main {
+            width: 100px;
+            height: 100px;
+            top: 100px;
+            left: 100px;
+            background-color: #0078d4;
+            color: white;
+            border-color: #005a9e;
+            border-radius: 20px;
+            font-size: 2rem;
+            box-shadow: 0 12px 32px rgba(0, 120, 212, 0.4);
+        }
+
+        .node-1 {
+            width: 60px;
+            height: 60px;
+            top: 20px;
+            left: 40px;
+        }
+
+        .node-2 {
+            width: 70px;
+            height: 70px;
+            top: 30px;
+            right: 30px;
+            border-color: #008272;
+            color: #008272;
+        }
+
+        .node-3 {
+            width: 55px;
+            height: 55px;
+            bottom: 30px;
+            left: 50px;
+            border-color: #8661c5;
+            color: #8661c5;
+        }
+
+        .node-4 {
+            width: 65px;
+            height: 65px;
+            bottom: 20px;
+            right: 40px;
+        }
+
+        /* Connecting Lines (CSS trick using pseudo-elements) */
+        .network-grid::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            border: 2px dashed rgba(0, 120, 212, 0.2);
+            border-radius: 50%;
+            z-index: -1;
+        }
+
+        /* --- AZURE CONTENT SECTIONS --- */
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: #201f1e;
+        }
+
+        .section-header p {
+            color: #605e5c;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: white;
+            border: 1px solid #edebe9;
+            border-radius: 8px;
+            padding: 35px 30px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.06);
+            border-color: #0078d4;
+        }
+
+        .service-icon {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            background: #e6f2ff;
+            border-radius: 10px;
+        }
+
+        .service-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 12px;
+            color: #201f1e;
+        }
+
+        .service-card p {
+            color: #605e5c;
+            font-size: 0.95rem;
+            line-height: 1.6;
+        }
+
+        /* Tech Stack Section */
+        .tech-stack-section {
+            background-color: white;
+            border-top: 1px solid #edebe9;
+            border-bottom: 1px solid #edebe9;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .tech-tag {
+            background-color: #f3f2f1;
+            border: 1px solid #e1dfdd;
+            color: #323130;
+            padding: 10px 24px;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.2s ease;
+        }
+
+        .tech-tag:hover {
+            background-color: #e6f2ff;
+            border-color: #0078d4;
+            color: #0078d4;
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            text-align: center;
+            color: #a19f9d;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 968px) {
+            h1 {
+                font-size: 2.8rem;
+            }
+            .hero {
+                flex-direction: column;
+                text-align: center;
+                padding: 40px 0;
+            }
+            .hero-content {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+            .hero-content p {
+                margin: 0 auto 30px auto;
+            }
+            .cta-group {
+                justify-content: center;
+            }
+            .hero-graphic {
+                margin-top: 40px;
+                width: 100%;
+                transform: scale(0.8);
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+            .cta-group {
+                flex-direction: column;
+                width: 100%;
+            }
+            .btn {
+                width: 100%;
+                text-align: center;
+            }
+            .section-header h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="wrapper">
+        <!-- Navigation Bar -->
+        <nav class="navbar">
+            <div class="logo">
+                <div class="logo-icon">☁</div>
+                Azure & DevOps
+            </div>
+            <div class="nav-links">
+                <a href="#contact" class="nav-btn">Contact</a>
+                <a href="#demo" class="nav-btn">Live Demo</a>
+            </div>
+        </nav>
+
+        <!-- Hero Section -->
+        <main class="hero">
+            <!-- Left Side: Text Content -->
+            <div class="hero-content">
+                <div class="badge">Enterprise Cloud • Secure • Scalable</div>
+                
+                <h1>
+                    Build, ship, and scale on <br>
+                    <span class="text-azure">Azure</span> with enterprise-grade <br>
+                    <span class="text-devops">DevOps.</span>
+                </h1>
+                
+                <p>
+                    From infrastructure as code to CI/CD and observability, this starter page 
+                    showcases a clean, modern layout you can drop into any Microsoft Azure project.
+                </p>
+                
+                <div class="cta-group">
+                    <a href="#services" class="btn btn-primary">Explore Services</a>
+                    <a href="#tech-stack" class="btn btn-secondary">View Tech Stack</a>
+                </div>
+            </div>
+
+            <!-- Right Side: Abstract Graphic -->
+            <div class="hero-graphic">
+                <div class="graphic-glow"></div>
+                
+                <!-- Abstract Azure Network Nodes -->
+                <div class="network-grid">
+                    <div class="node node-main">☁</div>
+                    <div class="node node-1">⚙</div>
+                    <div class="node node-2">📦</div>
+                    <div class="node node-3">🔒</div>
+                    <div class="node node-4">📊</div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Azure Services Section -->
+        <section id="services">
+            <div class="section-header">
+                <h2>What we do</h2>
+                <p>We architect, deploy, and manage scalable solutions entirely within the Microsoft Azure ecosystem.</p>
+            </div>
+            
+            <div class="services-grid">
+                <!-- Service 1 -->
+                <div class="service-card">
+                    <div class="service-icon">🏗️</div>
+                    <h3>Infrastructure as Code</h3>
+                    <p>Automate your Azure provisioning with Terraform and ARM templates for consistent, reproducible cloud environments.</p>
+                </div>
+
+                <!-- Service 2 -->
+                <div class="service-card">
+                    <div class="service-icon">🚀</div>
+                    <h3>Azure DevOps Pipelines</h3>
+                    <p>Streamline deployments with Azure Pipelines, GitHub Actions, and Bicep for rapid, reliable software delivery.</p>
+                </div>
+
+                <!-- Service 3 -->
+                <div class="service-card">
+                    <div class="service-icon">📦</div>
+                    <h3>Container Orchestration</h3>
+                    <p>Deploy and scale microservices effortlessly using Azure Kubernetes Service (AKS) and Azure Container Apps.</p>
+                </div>
+
+                <!-- Service 4 -->
+                <div class="service-card">
+                    <div class="service-icon">📊</div>
+                    <h3>Observability</h3>
+                    <p>Gain deep insights into your Azure infrastructure with Azure Monitor, Application Insights, and Log Analytics.</p>
+                </div>
+
+                <!-- Service 5 -->
+                <div class="service-card">
+                    <div class="service-icon">🔒</div>
+                    <h3>Security & Compliance</h3>
+                    <p>Implement Zero Trust architecture, Azure AD (Entra ID) integration, and Key Vault for robust cloud security.</p>
+                </div>
+
+                <!-- Service 6 -->
+                <div class="service-card">
+                    <div class="service-icon">⚡</div>
+                    <h3>Serverless Architecture</h3>
+                    <p>Build highly scalable, event-driven applications using Azure Functions, Logic Apps, and Event Grid.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tech Stack Section -->
+        <section id="tech-stack" class="tech-stack-section">
+            <div class="section-header">
+                <h2>Our Azure Tech Stack</h2>
+                <p>The core Microsoft services we use to build resilient cloud-native applications.</p>
+            </div>
+            
+            <div class="tech-stack">
+                <span class="tech-tag">Azure Kubernetes Service (AKS)</span>
+                <span class="tech-tag">Azure Functions</span>
+                <span class="tech-tag">Azure DevOps</span>
+                <span class="tech-tag">Azure SQL Database</span>
+                <span class="tech-tag">Cosmos DB</span>
+                <span class="tech-tag">Azure App Service</span>
+                <span class="tech-tag">Azure Monitor</span>
+                <span class="tech-tag">Azure Key Vault</span>
+                <span class="tech-tag">Entra ID (Azure AD)</span>
+                <span class="tech-tag">ARM Templates / Bicep</span>
+                <span class="tech-tag">Azure Virtual Network</span>
+                <span class="tech-tag">Azure Container Registry</span>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <p>&copy; 2024 Azure & DevOps. All rights reserved. Built for the enterprise cloud.</p>
+        </footer>
+    </div>
+
+</body>
+</html>
