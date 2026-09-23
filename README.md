@@ -1,5 +1,20 @@
+<img src="https://raw.githubusercontent.com/Somanath-Singh/aws-single-alb-multi-app-routing-aws-azure-gcp-/main/Images/home.png" alt="Home">
 
+<img src="https://raw.githubusercontent.com/Somanath-Singh/aws-single-alb-multi-app-routing-aws-azure-gcp-/main/Images/aws.png" alt="AWS">
 
+<img src="https://raw.githubusercontent.com/Somanath-Singh/aws-single-alb-multi-app-routing-aws-azure-gcp-/main/Images/azure.png" alt="Azure">
+
+<img src="https://raw.githubusercontent.com/Somanath-Singh/aws-single-alb-multi-app-routing-aws-azure-gcp-/main/Images/gcp.png" alt="GCP">
+
+<img src="https://raw.githubusercontent.com/Somanath-Singh/aws-single-alb-multi-app-routing-aws-azure-gcp-/main/Images/instances-servers.png" alt="Instances and Servers">
+
+<img src="https://raw.githubusercontent.com/Somanath-Singh/aws-single-alb-multi-app-routing-aws-azure-gcp-/main/Images/target-groups.png" alt="Target Groups">
+
+<img src="https://raw.githubusercontent.com/Somanath-Singh/aws-single-alb-multi-app-routing-aws-azure-gcp-/main/Images/application-load=balancer.png" alt="Application Load Balancer">
+
+<img src="https://raw.githubusercontent.com/Somanath-Singh/aws-single-alb-multi-app-routing-aws-azure-gcp-/main/Images/inside-alb.png" alt="Inside ALB">
+
+<img src="https://raw.githubusercontent.com/Somanath-Singh/aws-single-alb-multi-app-routing-aws-azure-gcp-/main/Images/rules-mapping-inside-alb.png" alt="ALB Rules Mapping">
 
 Think of the **Load Balancer** as the main entrance to an apartment building.
 
@@ -243,5 +258,132 @@ After saving, your listener rules should look like this (ordered from highest to
 | 2              | Path is `/azure` or `/azure/*` | Forward to `TG-Azure` | Azure app       |
 | 3              | Path is `/gcp` or `/gcp/*`     | Forward to `TG-GCP`   | GCP app         |
 | Default (last) | None (catch-all)               | Forward to `TG-Home`  | Home page       |
+
+
+<u>process to add the apps</u>
+
+### Instance 1: Home Page Server
+
+```bash
+yum install nginx -y
+systemctl start nginx
+cd /usr/share/nginx/html/
+vi index.html
+```
+
+Inside `index.html`, paste this:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Main Home Page</title>
+</head>
+<body>
+    <h1>Welcome to the Multi-Cloud Home Page</h1>
+    <a href="http://<YOUR-ALB-DNS>/aws/">Go to AWS App</a><br><br>
+    <a href="http://<YOUR-ALB-DNS>/azure/">Go to Azure App</a><br><br>
+    <a href="http://<YOUR-ALB-DNS>/gcp/">Go to GCP App</a>
+</body>
+</html>
+```
+
+Save and exit: `Esc`, `:wq`, `Enter`.
+
+---
+
+### Instance 2: AWS App Server
+
+```bash
+yum install nginx -y
+systemctl start nginx
+cd /usr/share/nginx/html/
+mkdir aws
+cd aws
+vi index.html
+```
+
+Inside `index.html`, paste this:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AWS Application</title>
+</head>
+<body>
+    <h1>Welcome to the AWS Application</h1>
+</body>
+</html>
+```
+
+Save and exit: `Esc`, `:wq`, `Enter`.
+
+---
+
+### Instance 3: Azure App Server
+
+```bash
+yum install nginx -y
+systemctl start nginx
+cd /usr/share/nginx/html/
+mkdir azure
+cd azure
+vi index.html
+```
+
+Inside `index.html`, paste this:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Azure Application</title>
+</head>
+<body>
+    <h1>Welcome to the Azure Application</h1>
+</body>
+</html>
+```
+
+Save and exit: `Esc`, `:wq`, `Enter`.
+
+---
+
+### Instance 4: GCP App Server
+
+```bash
+yum install nginx -y
+systemctl start nginx
+cd /usr/share/nginx/html/
+mkdir gcp
+cd gcp
+vi index.html
+```
+
+Inside `index.html`, paste this:
+
+```html
+<!DOCTYPE html>
+<html>
+<head>
+    <title>GCP Application</title>
+</head>
+<body>
+    <h1>Welcome to the GCP Application</h1>
+</body>
+</html>
+```
+
+Save and exit: `Esc`, `:wq`, `Enter`.
+
+---
+
+### Test Flow
+
+1. Open browser: `http://<YOUR-ALB-DNS>/` → Home Page
+2. Click "Go to AWS App" → `http://<YOUR-ALB-DNS>/aws/` → AWS App
+3. Click "Go to Azure App" → `http://<YOUR-ALB-DNS>/azure/` → Azure App
+4. Click "Go to GCP App" → `http://<YOUR-ALB-DNS>/gcp/` → GCP App
 
 
